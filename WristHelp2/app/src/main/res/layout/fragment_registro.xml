@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.RegistroFragment">
+
+    <TextView
+        android:layout_width="204dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="25dp"
+        android:text="Registro"
+        android:textColor="@android:color/holo_orange_dark"
+        android:textSize="35dp" />
+
+
+    <EditText
+        android:id="@+id/campo_usuario"
+        android:layout_width="287dp"
+        android:layout_height="59dp"
+        android:layout_marginBottom="200dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical"
+        android:hint="Nombre Usuario"
+        android:inputType="textMultiLine"
+        android:lines="3"
+        android:maxLines="3"
+        android:textColorHint="@android:color/holo_orange_dark" />
+
+
+    <TextView
+        android:id="@+id/texto_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/campo_usuario"
+        android:layout_alignEnd="@+id/campo_usuario"
+        android:layout_alignRight="@+id/campo_usuario"
+        android:layout_marginTop="100dp"
+        android:text="Nombre Usuario"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+    <EditText
+        android:id="@+id/campo_contrasena"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="100dp"
+        android:layout_gravity="center_vertical"
+        android:hint="Contraseña"
+        android:inputType="textPassword"
+        android:textColorHint="@android:color/holo_orange_dark" />
+
+    <TextView
+        android:id="@+id/texto_contrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_below="@+id/campo_correo"
+        android:layout_alignEnd="@+id/campo_correo"
+        android:layout_alignRight="@+id/campo_correo"
+        android:text="Contraseña"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+
+
+    <EditText
+        android:id="@+id/campo_correo"
+        android:layout_width="287dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="10dp"
+        android:layout_gravity="center_vertical"
+        android:hint="Correo Electronico"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@android:color/holo_orange_dark" />
+
+    <TextView
+        android:id="@+id/texto_correo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_below="@+id/campo_correo"
+        android:layout_alignEnd="@+id/campo_correo"
+        android:layout_alignRight="@+id/campo_correo"
+        android:text="Correo Electronico"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+
+
+
+    <Button
+        android:id="@+id/button_registrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrar"
+        android:textColor="@color/colorAccent"
+        android:layout_gravity= "center_horizontal"
+        android:layout_marginTop="400dp"
+        />
+
+    <ImageButton
+        android:id="@+id/button_regresar"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:src="@android:drawable/ic_menu_revert" />
+
+
+
+
+
+
+
+
+
+</FrameLayout>
