@@ -15,7 +15,8 @@
             android:title="Mensajes" />
         <item
             android:id="@+id/nav_tools"
-            android:title="Dispositivos" />
+            android:title="Cerrar Sesion" />
+
     </group>
 
 

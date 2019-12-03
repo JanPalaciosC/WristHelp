@@ -20,6 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
+        android:id="@+id/simulacro"
         style="@android:style/Widget.DeviceDefault.Light.ImageButton"
         android:layout_width="216dp"
         android:layout_height="131dp"
@@ -33,6 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/stat_notify_error"
-        tools:ignore="VectorDrawableCompat" />
+        tools:ignore="InvalidId,VectorDrawableCompat" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

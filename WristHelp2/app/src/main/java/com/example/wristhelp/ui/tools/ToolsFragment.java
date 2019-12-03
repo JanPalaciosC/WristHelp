@@ -31,5 +31,8 @@ public class ToolsFragment extends Fragment {
             }
         });
         return root;
+
     }
+
+
 }

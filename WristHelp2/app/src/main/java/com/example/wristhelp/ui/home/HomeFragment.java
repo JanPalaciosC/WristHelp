@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -30,6 +32,18 @@ public class HomeFragment extends Fragment {
                 textView.setText(s);
             }
         });
+
+
+        ImageButton simulacion;
+        simulacion = (ImageButton)  root.findViewById(R.id.simulacro);
+
+        simulacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "Has enviado un mensaje de auxilio", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return root;
     }
 }

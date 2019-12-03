@@ -1,12 +1,16 @@
 package com.example.wristhelp.login;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +19,14 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.example.wristhelp.BD.BaseData;
+
 import com.example.wristhelp.MainActivity;
 import com.example.wristhelp.R;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 
@@ -27,12 +35,14 @@ public class RegistroFragment extends Fragment {
     ImageButton btnRegresar;
     Fragment fragmentInicio;
     Button btnEntrar;
-    Object ContentValues;
-    BaseData basedata;
-
-    EditText  campoUsuario, campoContrasena, campoCorreo;
+    ProgressDialog progressDialog;
 
 
+
+    EditText  campoUsuario, campoContrasena, campoCorreo,campoConfirmar;
+
+    FirebaseAuth mAuth;
+    FirebaseAuth.AuthStateListener listener;
 
 
     @Override
@@ -51,17 +61,24 @@ public class RegistroFragment extends Fragment {
 
 
 
+        mAuth = FirebaseAuth.getInstance();
+
+
+
+
 
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registro, container, false);
 
         btnRegresar = view.findViewById(R.id.button_regresar);
 
-        campoUsuario = (EditText) view.findViewById(R.id.campo_usuario);
+        campoConfirmar = (EditText) view.findViewById(R.id.campo_confirmar);
         campoContrasena = (EditText) view.findViewById(R.id.campo_contrasena);
         campoCorreo = (EditText) view.findViewById(R.id.campo_correo);
 
-         basedata = new BaseData(getContext());
+         progressDialog = new ProgressDialog(getContext());
+
+
 
 
 
@@ -71,17 +88,8 @@ public class RegistroFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                SQLiteDatabase db = basedata.getWritableDatabase();
-                ContentValues valores = new ContentValues();
 
-                valores.put(BaseData.Datostabla.COLUMN_NOMBRES, campoUsuario.getText().toString());
-                valores.put(BaseData.Datostabla.COLUMN_PASSWORD, campoContrasena.getText().toString());
-                valores.put(BaseData.Datostabla.COLUMN_EMAIL, campoCorreo.getText().toString());
-
-                Long NombreGuardado = db.insert(BaseData.Datostabla.TABLE_NAME, BaseData.Datostabla.COLUMN_NOMBRES, valores);
-
-                Toast.makeText(getContext(),"Usuario creado:" + NombreGuardado, Toast.LENGTH_SHORT).show();
-
+                crearUsuario();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
@@ -90,7 +98,9 @@ public class RegistroFragment extends Fragment {
         btnRegresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fragmentInicio = new InicioFragment();
+
+                crearUsuario();
+               fragmentInicio = new InicioFragment();
                 getActivity().
                         getSupportFragmentManager()
                         .beginTransaction()
@@ -110,8 +120,64 @@ public class RegistroFragment extends Fragment {
         return view;
     }
 
+    private void crearUsuario() {
+        String email = campoCorreo.getText().toString().trim();
+        String contra = campoContrasena.getText().toString().trim();
+        String confirm = campoConfirmar.getText().toString().trim();
+
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(getContext(), "Se debe ingresar un correo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(contra)){
+            Toast.makeText(getContext(), "Falta ingresar una contraseña", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(confirm)){
+            Toast.makeText(getContext(), "Falta ingresar la confirmacion de contraseña", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        progressDialog.setMessage("Realizando registro en linea...");
+        progressDialog.show();
+
+        mAuth.createUserWithEmailAndPassword(email,contra)
+                .addOnCompleteListener((Activity) getContext(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //Si se logro
+                        if(task.isSuccessful()){
+                            Toast.makeText(getContext(), "Se ha registrado el correo.", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(getContext(), "No se pudo registrar el usuario.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        progressDialog.dismiss();
+
+                    }
+                });
+        mAuth.addAuthStateListener(listener);
 
 
+
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+       // mAuth.addAuthStateListener(listener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(listener != null){
+            mAuth.removeAuthStateListener(listener);
+        }
+    }
 
 
 

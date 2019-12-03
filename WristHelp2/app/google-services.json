@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "492468207033",
+    "firebase_url": "https://wristhelp-44e4d.firebaseio.com",
+    "project_id": "wristhelp-44e4d",
+    "storage_bucket": "wristhelp-44e4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492468207033:android:a3861a18ee12e3c5bc4a68",
+        "android_client_info": {
+          "package_name": "com.example.wristhelp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492468207033-9udbpe5624hcb23kimq34uokm4jr140h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUWGFYAnZEIbw_Bpwr63loP0x-zCE-svM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492468207033-9udbpe5624hcb23kimq34uokm4jr140h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
